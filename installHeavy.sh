@@ -462,7 +462,7 @@ selectBuildFile() {
 
 configureSSL() {
   echo "-- What is the domain you wish to configure for SSL use? --"
-  read -p domain_tmp
+  read domain_tmp
   if  [ $domain_tmp != "" ]; then
     echo "-- Setting domain to $domain_tmp --"
     DOMAIN=$tmp_domain
