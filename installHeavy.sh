@@ -13,6 +13,7 @@ EXTERNAL_PORT="8001"
 OPENAPI_KEY=""
 LANGSMITH_KEY=""
 LANGSMITH_PROJECT=""
+DOMAIN=""
 
 createFiles(){
 mkdir -p $CONFIG_TMP
@@ -40,6 +41,7 @@ services:
     volumes:
       - $CONFIG_TMP/nginx.conf:/etc/nginx/nginx.conf
       - /var/lib/heavyai/jupyter/nginx/log:/var/log/nginx/
+      - /etc/letsencrypt:/etc/letsencrypt
         
 
   heavyaiserver:
@@ -216,7 +218,11 @@ http {
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    listen 80;
+    ssl_certificate /etc/letsencrypt/live/$SERVER/fullchain.pem
+    ssl_cerificate_key /etc/letsencrypt/live/$SERVER/privkey.pem;
+
+
+    listen 80 ssl;
     listen [::]:80;
 
     server_name _;
@@ -338,6 +344,9 @@ c.JupyterHub.db_url = "sqlite:////data/jupyterhub.sqlite"
 # Authenticate users with Dummy Authenticator
 c.JupyterHub.authenticator_class = "dummyauthenticator.DummyAuthenticator"
 
+# Set a password for all users
+c.DummyAuthenticator.password = "HyperInteractive"
+
 jupyterEnd
 
 
@@ -451,6 +460,16 @@ selectBuildFile() {
 
 }
 
+configureSSL() {
+  print "-- What is the domain you wish to configure for SSL use? --"
+  read -p "? " DOMAIN
+  sudo snap install --classic certbot
+  sudo ln -s /snap/bin/certbot /usr/bin/certbot
+  sudo certbot certonly --standalone -d $DOMAIN
+}
+
+
 selectBuildFile
+configureSSL
 createFiles
 installFiles
