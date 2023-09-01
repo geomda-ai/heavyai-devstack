@@ -218,8 +218,8 @@ http {
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    ssl_certificate /etc/letsencrypt/live/$SERVER/fullchain.pem;
-    ssl_cerificate_key /etc/letsencrypt/live/$SERVER/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+    ssl_cerificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
 
 
     listen 80 ssl;
@@ -462,7 +462,7 @@ selectBuildFile() {
 
 configureSSL() {
   echo "-- What is the domain you wish to configure for SSL use? --"
-  read -p "? " domain_tmp
+  read -p domain_tmp
   if  [ $domain_tmp != "" ]; then
     echo "-- Setting domain to $domain_tmp --"
     DOMAIN=$tmp_domain
