@@ -465,7 +465,7 @@ configureSSL() {
   read -p "? " domain_tmp
   if  [ $domain_tmp != "" ]; then
     echo "-- Setting domain to $domain_tmp --"
-    DOMAIN=tmp_domain
+    DOMAIN=$tmp_domain
     echo "DOMAIN: $DOMAIN"
   fi
   echo "-- configuring SSL for $domain_tmp --"
