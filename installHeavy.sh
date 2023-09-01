@@ -218,7 +218,7 @@ http {
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    ssl_certificate /etc/letsencrypt/live/$SERVER/fullchain.pem
+    ssl_certificate /etc/letsencrypt/live/$SERVER/fullchain.pem;
     ssl_cerificate_key /etc/letsencrypt/live/$SERVER/privkey.pem;
 
 
