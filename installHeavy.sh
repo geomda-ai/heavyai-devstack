@@ -462,10 +462,16 @@ selectBuildFile() {
 
 configureSSL() {
   print "-- What is the domain you wish to configure for SSL use? --"
-  read -p "? " DOMAIN
+  read -p "? " domain_tmp
+  if  [ $domain_tmp != "" ]; then
+    print "-- Setting domain to $domain_tmp --"
+    DOMAIN=tmp_domain
+    print "DOMAIN: $DOMAIN"
+  fi
+  print "-- configuring SSL for $domain_tmp --"
   sudo snap install --classic certbot
   sudo ln -s /snap/bin/certbot /usr/bin/certbot
-  sudo certbot certonly --standalone -d $DOMAIN
+  sudo certbot certonly --standalone -d $domain_tmp
 }
 
 
