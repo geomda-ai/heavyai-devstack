@@ -255,8 +255,8 @@ http {
 }
 nginxEnd
 
-echo "I think the domain is $tmp_domain"
-echo "or maybe it is $DOMAIN"
+echo "I think the domain is $user_domain"
+echo "or maybe it is $1"
 read -p "Please type the domain for SSL configuration: " domain_for_nginx
 sed -i "s/__DOMAIN__/$domain_for_nginx/" $NGINX_CONF_FILE
 
@@ -463,21 +463,14 @@ selectBuildFile() {
 }
 
 configureSSL() {
-  echo "-- What is the domain you wish to configure for SSL use? --"
-  read domain_tmp
-  if  [ $domain_tmp != "" ]; then
-    echo "-- Setting domain to $domain_tmp --"
-    DOMAIN=$tmp_domain
-    echo "DOMAIN: $DOMAIN"
-  fi
-  echo "-- configuring SSL for $domain_tmp --"
   sudo snap install --classic certbot
   sudo ln -s /snap/bin/certbot /usr/bin/certbot
-  sudo certbot certonly --standalone -d $domain_tmp
+  sudo certbot certonly --standalone -d $1
 }
 
-
 selectBuildFile
-configureSSL
-createFiles
+echo "-- What is the domain you wish to configure for SSL use? --"
+read user_domain
+configureSSL $user_domain
+createFiles $user_domain
 installFiles
