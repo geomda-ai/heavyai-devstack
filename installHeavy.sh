@@ -255,10 +255,7 @@ http {
 }
 nginxEnd
 
-echo "I think the domain is $user_domain"
-echo "or maybe it is $1"
-read -p "Please type the domain for SSL configuration: " domain_for_nginx
-sed -i "s/__DOMAIN__/$domain_for_nginx/" $NGINX_CONF_FILE
+sed -i "s/__DOMAIN__/$1/" $NGINX_CONF_FILE
 
 cat > $DOCKERFILE_FILE <<dockerEnd
 # Copyright (c) Jupyter Development Team.
@@ -469,8 +466,13 @@ configureSSL() {
 }
 
 selectBuildFile
+read -p "Do you want to configure SSL? (Y/N)" ssl_conf
+if [[$ssl_conf == "Y" || $ssl_conf == "y"]]; then 
 echo "-- What is the domain you wish to configure for SSL use? --"
 read user_domain
 configureSSL $user_domain
+else
+echo "You should check out the NON-SSL configuration branch of heavyai-devstack. Press ^C now, please."
+fi
 createFiles $user_domain
 installFiles
