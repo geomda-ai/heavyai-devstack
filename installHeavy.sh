@@ -255,8 +255,8 @@ http {
 }
 nginxEnd
 
-read -p "--- what was that domain again? " DOMAIN
-sed -i "s/__DOMAIN__/$DOMAIN/" $NGINX_CONF_FILE
+read -p "Please type the domain for SSL configuration: " domain_for_nginx
+sed -i "s/__DOMAIN__/$domain_for_nginx/" $NGINX_CONF_FILE
 
 cat > $DOCKERFILE_FILE <<dockerEnd
 # Copyright (c) Jupyter Development Team.
