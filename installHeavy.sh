@@ -255,7 +255,7 @@ http {
 }
 nginxEnd
 
-sed -i 's/__DOMAIN__/$DOMAIN/' $NGINX_CONF_FILE
+sed -i "s/__DOMAIN__/$DOMAIN/" $NGINX_CONF_FILE
 
 cat > $DOCKERFILE_FILE <<dockerEnd
 # Copyright (c) Jupyter Development Team.
