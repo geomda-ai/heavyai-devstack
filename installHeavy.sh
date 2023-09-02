@@ -188,8 +188,10 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
   }
 ]
 serverJsonEnd
+
 echo "Preparing nginx configuration file with domain $DOMAIN"
-cat >$NGINX_CONF_FILE <<nginxEnd
+
+cat >$NGINX_CONF_FILE <<-nginxEnd
 events {}
 
 http {
