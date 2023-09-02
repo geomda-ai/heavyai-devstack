@@ -255,6 +255,7 @@ http {
 }
 nginxEnd
 
+read -p "--- what was that domain again? " DOMAIN
 sed -i "s/__DOMAIN__/$DOMAIN/" $NGINX_CONF_FILE
 
 cat > $DOCKERFILE_FILE <<dockerEnd
