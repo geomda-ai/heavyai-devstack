@@ -466,9 +466,10 @@ configureSSL() {
 }
 
 selectBuildFile
-read -p "Do you want to configure SSL? (Y/N)"
+read -p "Do you want to configure SSL (Y/N)?" -n 1 -r
 echo
-if [[ $REPLY =~ ^[Yy]$ ]] then 
+if [[ $REPLY =~ ^[Yy]$ ]]
+then 
   echo "-- What is the domain you wish to configure for SSL use? --"
   read user_domain
   configureSSL $user_domain
