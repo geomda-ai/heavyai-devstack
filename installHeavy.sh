@@ -255,6 +255,8 @@ http {
 }
 nginxEnd
 
+echo "I think the domain is $tmp_domain"
+echo "or maybe it is $DOMAIN"
 read -p "Please type the domain for SSL configuration: " domain_for_nginx
 sed -i "s/__DOMAIN__/$domain_for_nginx/" $NGINX_CONF_FILE
 
