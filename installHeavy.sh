@@ -190,8 +190,7 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
 serverJsonEnd
 
 echo "Preparing nginx configuration file with domain $DOMAIN"
-
-cat >$NGINX_CONF_FILE <<-nginxEnd
+cat >$NGINX_CONF_FILE <<nginxEnd
 events {}
 
 http {
@@ -216,8 +215,8 @@ http {
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/__DOMAIN__/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/__DOMAIN__/privkey.pem;
 
 
     listen 80 ssl;
@@ -255,6 +254,8 @@ http {
   }
 }
 nginxEnd
+
+sed 's/__DOMAIN__/${DOMAIN}/' $NGINX_CONF_FILE
 
 cat > $DOCKERFILE_FILE <<dockerEnd
 # Copyright (c) Jupyter Development Team.
