@@ -191,7 +191,7 @@ cat > $SERVERS_JSON_FILE <<serverJsonEnd
   }
 ]
 serverJsonEnd
-
+echo "Preparing nginx configuration file with domain $DOMAIN"
 cat >$NGINX_CONF_FILE <<nginxEnd
 events {}
 
@@ -217,8 +217,8 @@ http {
     access_log /var/log/nginx/access.log;
     error_log /var/log/nginx/error.log;
 
-    ssl_certificate /etc/letsencrypt/live/"$DOMAIN"/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/"$DOMAIN"/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${DOMAIN}/privkey.pem;
 
 
     listen 80 ssl;
