@@ -1,9 +1,9 @@
 {
     "versionOptions": [
         {
-            "name": "Special Release",
+            "name": "Latest Release",
             "type": "release",
-            "imageName": "heavyai/heavyai-ee-cuda:special",
+            "imageName": "heavyai/heavyai-ee-cuda:latest",
             "filepath": "",
             "filename": ""
         }
