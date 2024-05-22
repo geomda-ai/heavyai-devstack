@@ -140,7 +140,7 @@ access_log_level = "DEBUG"
 access_log_max_file_size = 10485760000
 heavyiq_log_max_file_size = 10485760000
 custom_llm_type = "API_VLLM" # API or AZURE
-custom_llm_api_base = "http://209.20.158.0:5000/v1"
+custom_llm_api_base = "https://api.heavy.ai/v1"
 custom_llm_api_vllm_beam_width = 2
 custom_llm_api_context_window = 8192 # context window limit
 conFileEnd
