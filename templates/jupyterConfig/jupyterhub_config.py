@@ -27,8 +27,7 @@ c.DockerSpawner.notebook_dir = notebook_dir
 # Mount volumes for users and shared data
 c.DockerSpawner.volumes = {
     "jupyterhub-user-{username}": notebook_dir,
-    "jupyterhub-shared": "/home/jovyan/work/shared",
-    "jupyterhub-data": "/home/jovyan/work/data"
+    "/var/lib/heavyai": "/var/lib/heavyai"
 }
 
 # Remove containers once they are stopped (set this to True or False based on your needs)
