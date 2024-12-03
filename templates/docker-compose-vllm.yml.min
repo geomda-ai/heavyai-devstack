@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    command:
+      - --model=heavyai/heavyiq-deepseek-coder-33b-combo-v60-3072-tokens-questions-no-meta-lr-1-2-gc-1-5
+      - --trust-remote-code
+      - --max-num-batched-tokens=16384
+      - --enable-prefix-cacheing
+      - --max-model-len=16384
+      - --dtype=bfloat16
+      - --port=5000
+      - --tensor-parallel-size=2 #can be used for parallel usage across GPU's
+    runtime: nvidia
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    environment:
+      - HUGGING_FACE_HUB_TOKEN=${HUGGING_FACE_HUB_TOKEN}
+    ports:
+      - "5000:5000"
+    ipc: host

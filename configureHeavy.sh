@@ -40,7 +40,7 @@ HEAVYDB_SERVICE_NAME="heavydb"
 IMMERSE_SERVICE_NAME="immerse"
 IQ_SERVICE_NAME="iq"
 CONFIG_STAGING_LOCATION="./staging"
-: ${CONTAINER:="docker-internal.mapd.com/mapd/mapd-render:master"}
+: ${CONTAINER:="heavyai/heavyai-ee-cuda:latest "}
 
 : ${IMMERSE_PORT:="6273"}
 : ${HEAVYDB_PORT:="6274"}
